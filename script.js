@@ -10,18 +10,18 @@ const taskInput = document.getElementById("task-input");
 const addBtn = document.getElementById("add-btn");
 const taskList = document.getElementById("task-list");
 
-// TODO 7: Viết hàm loadTasks() - load dữ liệu từ LocalStorage khi mở trang
+// TODO 1: Viết hàm getTasks()
 // Gợi ý: Lấy dữ liệu, parse JSON, gán vào mảng tasks, rồi render
 function getTasks() {
   return JSON.parse(localStorage.getItem("tasks")) || [];
 }
 
-// TODO 6: Viết hàm saveTasks() - lưu tasks vào LocalStorage
+// TODO 2: Viết hàm saveTasks() - lưu tasks vào LocalStorage
 // Gợi ý: localStorage.setItem('tasks', JSON.stringify(tasks))
 function saveTasks(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
-// TODO 1: Viết hàm renderTasks() - hiển thị danh sách task ra HTML
+// TODO 3: Viết hàm renderTasks() - hiển thị danh sách task ra HTML
 // Gợi ý: Xóa toàn bộ nội dung taskList.innerHTML, sau đó dùng forEach để tạo li + nút Edit, Delete
 function renderTasks() {
   taskList.innerHTML = "";
@@ -46,7 +46,7 @@ function renderTasks() {
   });
 }
 
-// TODO 2: Viết hàm addTask() - thêm task mới vào mảng và gọi renderTasks()
+// TODO 4: Viết hàm addTask() - thêm task mới vào mảng và gọi renderTasks()
 // Gợi ý: Lấy value từ taskInput, tạo object { id: Date.now(), title: ..., completed: false }
 function addTask() {
   const taskText = taskInput.value.trim();
@@ -56,12 +56,12 @@ function addTask() {
   }
   const tasks = getTasks();
   tasks.push(taskText);
-  saveTasks(tasks); 
+  saveTasks(tasks);
   taskInput.value = "";
   renderTasks();
 }
 
-// TODO 4: Viết hàm deleteTask(id) - xóa task khỏi mảng
+// TODO 5: Viết hàm deleteTask(id) - xóa task khỏi mảng
 // Gợi ý: Dùng filter để loại bỏ task có id
 function deleteTask(index) {
   const tasks = getTasks();
@@ -70,8 +70,7 @@ function deleteTask(index) {
   renderTasks();
 }
 
-// TODO 5: Viết hàm editTask(id) - cho phép sửa title của task
-// Gợi ý: Dùng prompt() hoặc hiển thị input sửa trực tiếp
+// TODO 6: Viết hàm editTask(id) - cho phép sửa title của task
 function editTask(index, newText) {
   const tasks = getTasks();
   tasks[index] = newText;
@@ -79,11 +78,7 @@ function editTask(index, newText) {
   renderTasks();
 }
 
-// TODO 3: Viết hàm toggleTask(id) - đổi trạng thái completed của task
-// Gợi ý: Tìm task theo id trong mảng, đổi task.completed = !task.completed
-
-// TODO 8: Gắn sự kiện click cho addBtn để gọi addTask()
-
+// TODO 7: Gắn sự kiện click cho addBtn để gọi addTask()
 addBtn.addEventListener("click", addTask);
 taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
@@ -91,6 +86,8 @@ taskInput.addEventListener("keypress", (e) => {
   }
 });
 
+// TODO 9: Gắn sự kiện click cho taskList (event delegation)
+// Gợi ý: Kiểm tra e.target.classList.contains('edit-btn') hoặc 'delete-btn' hoặc 'task-title'
 taskList.addEventListener("click", (e) => {
   const clickedElement = e.target;
   const li = clickedElement.closest("li");
@@ -109,7 +106,3 @@ taskList.addEventListener("click", (e) => {
 });
 
 renderTasks();
-// TODO 9: Gắn sự kiện click cho taskList (event delegation)
-// Gợi ý: Kiểm tra e.target.classList.contains('edit-btn') hoặc 'delete-btn' hoặc 'task-title'
-
-// TODO 10: Khi hoàn thành xong, test lại toàn bộ chức năng và xem dữ liệu lưu được chưa
