@@ -86,7 +86,7 @@ taskInput.addEventListener("keypress", (e) => {
   }
 });
 
-// TODO 9: Gắn sự kiện click cho taskList (event delegation)
+// TODO 8: Gắn sự kiện click cho taskList (event delegation)
 // Gợi ý: Kiểm tra e.target.classList.contains('edit-btn') hoặc 'delete-btn' hoặc 'task-title'
 taskList.addEventListener("click", (e) => {
   const clickedElement = e.target;
